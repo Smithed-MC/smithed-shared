@@ -1,11 +1,7 @@
-import React from 'react'
-import { ZipWriter, BlobWriter, BlobReader } from "@zip.js/zip.js"
-import download from "download"
 import DefaultResourcepackBuilder from "slimeball/out/resourcepack"
 import { PackBuilder } from "slimeball/out/util"
 import { WeldDatapackBuilder } from "smithed-weld/out/datapack"
-import { firebaseApp } from "../setup-firebase"
-import saveAs from 'file-saver'
+import { database, firebaseApp } from "./ConfigureFirebase"
 export default class PackDownloader {
     private datapacks: [string, Buffer][] = []
     private resourcepacks: [string, Buffer][] = []
@@ -22,7 +18,7 @@ export default class PackDownloader {
     }
 
     private async getPackData(uid: string, id: string) {
-        const ownerPacks = (await firebaseApp.database().ref(`users/${uid}/packs`).get()).val() as any[]
+        const ownerPacks = (await database.ref(`users/${uid}/packs`).get()).val() as any[]
 
         for (let p of ownerPacks) {
             if (p.id === id) {
