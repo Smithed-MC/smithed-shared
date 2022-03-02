@@ -7,12 +7,12 @@ export default class PackDownloader {
     private resourcepacks: [string, Buffer][] = []
     private packIds: string[] = []
     private gameVersion: string = '1.18.1'
-    private onStatus: (element: string) => void
+    private onStatus: (element: string, spam?: boolean) => void
 
     private dpBlob: [string, Blob] = ['', new Blob()]
     private rpBlob: [string, Blob] = ['', new Blob()]
 
-    constructor(onStatus: (message: string) => void, gameVersion?: string) {
+    constructor(onStatus: (message: string, spam?: boolean) => void, gameVersion?: string) {
         this.onStatus = onStatus
         if (gameVersion) this.gameVersion = gameVersion
     }
