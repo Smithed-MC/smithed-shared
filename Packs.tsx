@@ -117,25 +117,6 @@ function Packs(props: any) {
         return versionElements;
     }
 
-    const markdown: MarkdownToJSX.Options = {
-        overrides: {
-            h1: <h1 style={{ fontSize: '2.5rem', fontFamily: 'Disket-Bold' }}><hr /></h1>,
-            h2: <h2 style={{ fontSize: '2rem', color: 'white', fontFamily: 'Disket-Bold' }}><hr /></h2>,
-            h3: <h3 style={{ fontSize: '1.5rem', color: 'white', fontFamily: 'Disket-Bold' }}><hr /></h3>,
-            pre: styled.pre`background-color: #24232B; padding: 8px; border-radius: 4px;`,
-            a: styled.a`
-                color: #216BEA;
-                text-decoration: underline;
-                :hover {
-                    filter: brightness(90%);
-                }
-                :active {
-                    color: #1B48C4;
-                }
-            `
-        }
-    }
-
     if (packData.versions === undefined) return (<div className='flex flex-col justify-center items-center w-full'>
         <h1>Loading...</h1>
     </div>)
