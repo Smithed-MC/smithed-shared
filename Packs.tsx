@@ -1,11 +1,11 @@
-import customProtocolCheck from 'protocol-checker'
+// import customProtocolCheck from 'protocol-checker'
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { database } from './ConfigureFirebase'
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import styled from 'styled-components';
-import { palette } from '../Palette';
-
+import palette from './Palette';
+import { MarkdownOptions } from './Markdown';
 
 interface VersionData {
     name: '',
@@ -24,20 +24,20 @@ interface PackData {
 }
 
 function Packs(props: any) {
-    const { owner, id }: { owner: string, id: string } = useParams()
+    const { owner, id } = props
     const history = useHistory();
     const [packData, setPackData] = useState({} as PackData);
     const [maxVersions, setMaxVersions] = useState(5)
 
-    const protocol = () => {
-        customProtocolCheck(
-            `smithed://packs/${owner}/${id}`,
-            () => {
-                alert('You haven\'t installed Smithed!')
-                history.replace('/')
-            }
-        )
-    }
+    // const protocol = () => {
+    //     customProtocolCheck(
+    //         `smithed://packs/${owner}/${id}`,
+    //         () => {
+    //             alert('You haven\'t installed Smithed!')
+    //             history.replace('/')
+    //         }
+    //     )
+    // }
 
     useEffect(() => {
         database.ref(`/packs/${owner}:${id}`).get().then(async (entry) => {
@@ -119,9 +119,9 @@ function Packs(props: any) {
 
     const markdown: MarkdownToJSX.Options = {
         overrides: {
-            h1: <h1 style={{ fontSize: '2.5rem' }}><hr /></h1>,
-            h2: <h2 style={{ fontSize: '2rem', color: 'white' }}><hr /></h2>,
-            h3: <h3 style={{ fontSize: '1.5rem', color: 'white' }}><hr /></h3>,
+            h1: <h1 style={{ fontSize: '2.5rem', fontFamily: 'Disket-Bold' }}><hr /></h1>,
+            h2: <h2 style={{ fontSize: '2rem', color: 'white', fontFamily: 'Disket-Bold' }}><hr /></h2>,
+            h3: <h3 style={{ fontSize: '1.5rem', color: 'white', fontFamily: 'Disket-Bold' }}><hr /></h3>,
             pre: styled.pre`background-color: #24232B; padding: 8px; border-radius: 4px;`,
             a: styled.a`
                 color: #216BEA;
@@ -144,7 +144,7 @@ function Packs(props: any) {
         return (<div>
             <h2 style={{ color: 'white' }}>Downloads</h2>
             <hr className='w-full h-2' />
-            <button className='p-2 rounded-md w-full mb-2' onClick={() => protocol()}>VIEW IN SMITHED</button>
+            {/* <button className='p-2 rounded-md w-full mb-2' onClick={() => protocol()}>VIEW IN SMITHED</button> */}
             <button className='p-2 rounded-md w-full mb-2' onClick={() => {
                 const supports = packData.versions[packData.versions.length - 1].supports
                 history.push(`/download?pack=${owner}:${id}&version=${supports[0]}`)
@@ -155,7 +155,7 @@ function Packs(props: any) {
     }
 
     return (
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 font-[Inconsolata] text-text w-full'>
             <div className='flex flex-col p-2 xl:flex-row'>
                 <div className='xl:w-1/4'>
                     {/* {renderSupport()} */}
@@ -166,7 +166,7 @@ function Packs(props: any) {
                         <label style={{ fontFamily: 'Disket-Bold', fontSize: 18, alignSelf: 'center', width: '100%', WebkitUserSelect: 'none' }}>{packData.name}</label>
                     </div>
                     <div className='w-full h-1' style={{ backgroundColor: '#1B48C4', borderRadius: 8 }}></div>
-                    <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: palette.darkBackground }} options={markdown}>
+                    <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: palette.darkBackground }} options={MarkdownOptions()}>
                         {packData.webPage}
                     </Markdown>
                 </div>

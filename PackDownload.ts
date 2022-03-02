@@ -1,7 +1,7 @@
 import DefaultResourcepackBuilder from "slimeball/out/resourcepack"
 import { PackBuilder } from "slimeball/out/util"
 import { WeldDatapackBuilder } from "smithed-weld/out/datapack"
-import { database, firebaseApp } from "./ConfigureFirebase"
+import { database } from "./ConfigureFirebase"
 export default class PackDownloader {
     private datapacks: [string, Buffer][] = []
     private resourcepacks: [string, Buffer][] = []
@@ -117,7 +117,7 @@ export default class PackDownloader {
 
 
     private async startDownload(owner: string, id: string, version?: string) {
-        const dbEntry = (await firebaseApp.database().ref(`packs/${owner}:${id}`).get()).val()
+        const dbEntry = (await database.ref(`packs/${owner}:${id}`).get()).val()
         this.packIds.push(owner + ':' + id)
 
         this.onStatus(`Downloading pack:\n${owner}:${id}`)
@@ -174,7 +174,7 @@ export default class PackDownloader {
 
 
         if (this.datapacks.length > 0) {
-            // const jarLink = (await firebaseApp.database().ref(`meta/vanilla/${gameVersion.replace(/[.]+/g, '_')}`).get()).val()
+            // const jarLink = (await database.ref(`meta/vanilla/${gameVersion.replace(/[.]+/g, '_')}`).get()).val()
             // const jar = await fetchFile(jarLink);
             // if (jar != null) {
             //     console.log(jar);
