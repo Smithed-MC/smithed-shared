@@ -59,6 +59,9 @@ export let registeredPalettes: { [key: string]: Palette } = {
     creeperMagnet: creeperMagnet
 }
 
+let palette = defaultDark
+setPalette(defaultDark)
+
 export function setPalette(p: Palette) {
     palette = p;
     const root = document.getElementById("root")
@@ -71,7 +74,6 @@ export function setPalette(p: Palette) {
     }
 }
 
-let palette = defaultDark
 
 export default palette
 
