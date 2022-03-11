@@ -19,7 +19,8 @@ const defaultDark: Palette = {
     lightBackground: '#2F2F38',
     text: '#FFFFFF',
     subText: '#A0A0A0',
-    titlebar: '#FFFFFF'
+    codeText: '#E2C052',
+    titlebar: '#FFFFFF',
 }
 const mccDark: Palette = {
     darkAccent: '#02ADEE',

@@ -17,7 +17,8 @@ export const MarkdownOptions = (wrapper?: React.ElementType<any>): MarkdownToJSX
 			h3: <h3 className="select-none text-subText font-[Disket-Bold] text-2xl"></h3>,
 			a: ModifyiedA,
 			hr: <hr className="bg-lightAccent"></hr>,
-			span: <span className="text-text font-[Inconsolata]"></span>
+			span: <span className="text-text font-[Inconsolata]"></span>,
+			code: <code className="bg-lightBackground p-1 rounded-md text-codeText"></code>
 		}
 	}
 }
