@@ -1,5 +1,4 @@
 import { MarkdownToJSX } from "markdown-to-jsx"
-import palette from "./Palette"
 
 function ModifyiedA(props: any) {
 	return (

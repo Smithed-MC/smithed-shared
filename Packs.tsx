@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router'
 import { database } from './ConfigureFirebase'
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
 import styled from 'styled-components';
-import palette from './Palette';
 import { MarkdownOptions } from './Markdown';
 
 interface VersionData {
