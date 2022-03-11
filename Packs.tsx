@@ -104,9 +104,9 @@ function Packs(props: any) {
             const v = versions[versions.length - i - 1]
 
             versionElements.push(<div className='flex flex-col items-left w-full'>
-                <h3 style={{ color: 'white' }}>{v.name}</h3>
+                <h3 style={{ color: 'var(--text)' }}>{v.name}</h3>
                 <div className='flex flex-row gap-4 w-full'>
-                    <label className='p-2 rounded-md' style={{ backgroundColor: palette.lightBackground }}>{v.supports.join(', ')}</label>
+                    <label className='p-2 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{v.supports.join(', ')}</label>
                     <button className='p-2 rounded-md' onClick={() => {
                         history.push(`/download?pack=${owner}:${id}@${v.name}`)
                     }}>DOWNLOAD</button>
@@ -123,7 +123,7 @@ function Packs(props: any) {
 
     const renderBrowserLeftPanel = () => {
         return (<div>
-            <h2 style={{ color: 'white' }}>Downloads</h2>
+            <h2 style={{ color: 'var(--text)' }}>Downloads</h2>
             <hr className='w-full h-2' />
             {/* <button className='p-2 rounded-md w-full mb-2' onClick={() => protocol()}>VIEW IN SMITHED</button> */}
             <button className='p-2 rounded-md w-full mb-2' onClick={() => {
@@ -143,32 +143,32 @@ function Packs(props: any) {
                 </div>
                 <div className='flex flex-col gap-2 xl:w-1/2'>
                     <div className='flex w-full gap-2 justify-left'>
-                        <img style={{ width: 64, height: 64, border: `4px solid #1B48C4`, borderRadius: 8 }} src={packData.icon} alt="Pack Icon" />
+                        <img style={{ width: 64, height: 64, border: `4px solid var(--lightAccent)`, borderRadius: 8 }} src={packData.icon} alt="Pack Icon" />
                         <label style={{ fontFamily: 'Disket-Bold', fontSize: 18, alignSelf: 'center', width: '100%', WebkitUserSelect: 'none' }}>{packData.name}</label>
                     </div>
-                    <div className='w-full h-1' style={{ backgroundColor: '#1B48C4', borderRadius: 8 }}></div>
-                    <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: palette.darkBackground }} options={MarkdownOptions()}>
+                    <div className='w-full h-1' style={{ backgroundColor: 'var(--lightAccent)', borderRadius: 8 }}></div>
+                    <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: 'var(--darkBackground)' }} options={MarkdownOptions()}>
                         {packData.webPage}
                     </Markdown>
                 </div>
                 <div className='flex w-full xl:w-1/4 justify-center px-4'>
-                    <div className='flex flex-col p-2 w-3/4 items-left' style={{ borderRadius: 8, border: `4px solid #1B48C4`, backgroundColor: palette.darkBackground }}>
-                        <h2 style={{ color: 'white' }}>About</h2>
+                    <div className='flex flex-col p-2 w-3/4 items-left' style={{ borderRadius: 8, border: `4px solid var(--lightAccent)`, backgroundColor: 'var(--darkBackground)' }}>
+                        <h2 style={{ color: 'var(--text)' }}>About</h2>
                         <hr className='w-full h-2' />
                         <div className='flex flex-col gap-1'>
                             <div className='flex flex-row justify-between items-center w-full'>
-                                <label style={{ color: 'white' }}>Added:</label>
-                                <label className='p-1 rounded-md' style={{ backgroundColor: palette.lightBackground }}>{new Date(packData.added).toLocaleDateString()}</label>
+                                <label style={{ color: 'var(--text)' }}>Added:</label>
+                                <label className='p-1 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{new Date(packData.added).toLocaleDateString()}</label>
                             </div>
 
                             <div className='flex flex-row justify-between items-center w-full'>
-                                <label style={{ color: 'white' }}>Updated:</label>
-                                <label className='p-1 rounded-md' style={{ backgroundColor: palette.lightBackground }}>{packData.updated} day{packData.updated !== 1 && 's'} ago</label>
+                                <label style={{ color: 'var(--text)' }}>Updated:</label>
+                                <label className='p-1 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{packData.updated} day{packData.updated !== 1 && 's'} ago</label>
                             </div>
 
                             <div className='flex flex-row justify-between items-center w-full'>
-                                <label style={{ color: 'white' }}>Downloads:</label>
-                                <label className='p-1 rounded-md' style={{ backgroundColor: palette.lightBackground }}>{packData.downloads}</label>
+                                <label style={{ color: 'var(--text)' }}>Downloads:</label>
+                                <label className='p-1 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{packData.downloads}</label>
                             </div>
                         </div>
                         <br />

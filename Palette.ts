@@ -6,7 +6,8 @@ interface Palette {
     lightBackground: string, 
     text: string, 
     subText: string, 
-    titlebar: string
+    titlebar: string,
+    [key: string]: any
 }
 
 
@@ -44,9 +45,9 @@ const defaultLight: Palette = {
     darkAccent: '#1B48C4',
     lightAccent: '#216BEA',
     badAccent: '#DD0037',
-    darkBackground: '#A0A0AF',
-    lightBackground: '#D9D9E0',
-    text: '#24232B',
+    lightBackground: '#C0C0CF',
+    darkBackground: '#D9D9E0',
+    text: '#2F2F2F',
     subText: '#2F2F38',
     titlebar: '#FFFFFF'
 }
@@ -60,6 +61,14 @@ export let registeredPalettes: { [key: string]: Palette } = {
 
 export function setPalette(p: Palette) {
     palette = p;
+    const root = document.getElementById("root")
+    const style = root?.style
+
+    console.log(p)
+    
+    for(let k in p) {
+        style?.setProperty(`--${k}`, p[k])
+    }
 }
 
 let palette = defaultDark
