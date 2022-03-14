@@ -162,16 +162,18 @@ function Packs(props: any) {
 
     return (
         <div className='flex flex-col gap-4 font-[Inconsolata] text-text w-full'>
-            <div className='flex flex-col p-2 xl:flex-row items-center xl:items-start xl:justify-center w-full xl:px-32'>
-                <div className='flex flex-col gap-2 w-full xl:w-3/4'>
+            <div className='flex flex-col p-2 xl:flex-row items-center xl:items-start xl:justify-center w-full'>
+                <div className='flex flex-col gap-2 w-full xl:w-3/4 h-full'>
                     <div className='flex w-full gap-2 justify-left'>
                         <img style={{ width: 64, height: 64, border: `4px solid var(--lightAccent)`, borderRadius: 8 }} src={packData.icon} alt="Pack Icon" />
                         <label style={{ fontFamily: 'Disket-Bold', fontSize: 18, alignSelf: 'center', width: '100%', WebkitUserSelect: 'none' }}>{packData.name}</label>
                     </div>
                     <div className='w-full h-1' style={{ backgroundColor: 'var(--lightAccent)', borderRadius: 8 }}></div>
-                    <Markdown className='h-full' style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: 'var(--darkBackground)' }} options={MarkdownOptions()}>
-                        {packData.webPage}
-                    </Markdown>
+                    <div className='flex xl:mx-16'>
+                        <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: 'var(--darkBackground)' }} options={MarkdownOptions()}>
+                            {packData.webPage}
+                        </Markdown>
+                    </div>
                 </div>
                 <div className='flex w-full md:w-1/2 xl:w-1/4 justify-center px-4 gap-2 flex-col'>
                     <div className='flex flex-col p-2 items-left' style={{ borderRadius: 8, border: `4px solid var(--lightAccent)`, backgroundColor: 'var(--darkBackground)' }}>
