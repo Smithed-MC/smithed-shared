@@ -7,6 +7,7 @@ interface Palette {
     text: string, 
     subText: string, 
     titlebar: string,
+    codeText: string,
     [key: string]: any
 }
 
@@ -30,7 +31,8 @@ const mccDark: Palette = {
     lightBackground: defaultDark.lightBackground,
     text: defaultDark.text,
     subText: defaultDark.subText,
-    titlebar: defaultDark.titlebar
+    titlebar: defaultDark.titlebar,
+    codeText: defaultDark.codeText
 }
 const creeperMagnet: Palette = {
     darkAccent: '#006F1C',
@@ -40,7 +42,8 @@ const creeperMagnet: Palette = {
     lightBackground: defaultDark.lightBackground,
     text: defaultDark.text,
     subText: defaultDark.subText,
-    titlebar: defaultDark.titlebar
+    titlebar: defaultDark.titlebar,
+    codeText: defaultDark.codeText
 }
 const defaultLight: Palette = {
     darkAccent: '#1B48C4',
@@ -50,7 +53,8 @@ const defaultLight: Palette = {
     darkBackground: '#D9D9E0',
     text: '#2F2F2F',
     subText: '#2F2F38',
-    titlebar: '#FFFFFF'
+    titlebar: '#FFFFFF',
+    codeText: '#725D33',
 }
 
 export let registeredPalettes: { [key: string]: Palette } = {
