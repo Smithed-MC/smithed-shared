@@ -1,4 +1,4 @@
-interface Palette { 
+export interface Palette { 
     darkAccent: string, 
     lightAccent: string, 
     badAccent: string,
@@ -62,6 +62,10 @@ export let registeredPalettes: { [key: string]: Palette } = {
     defaultLight: defaultLight,
     mccDark: mccDark,
     creeperMagnet: creeperMagnet
+}
+
+export function addPalette(name: string, palette: Palette) {
+    registeredPalettes[name] = palette
 }
 
 let palette = defaultDark
