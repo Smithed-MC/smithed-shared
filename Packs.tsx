@@ -1,17 +1,17 @@
 // import customProtocolCheck from 'protocol-checker'
-import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router'
+import { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router'
 import { database } from './ConfigureFirebase'
-import Markdown, { MarkdownToJSX } from 'markdown-to-jsx';
-import styled from 'styled-components';
+import Markdown from 'markdown-to-jsx';
 import { MarkdownOptions } from './Markdown';
+import Profile from './Profile';
 
 interface VersionData {
     name: '',
     supports: string[]
 }
 
-interface PackData {
+export interface PackData {
     name: '',
     icon: '',
     webPage: '',
@@ -22,13 +22,22 @@ interface PackData {
     updated: number
 }
 
-function Packs(props: any) {
+
+interface PacksProps {
+    owner: string,
+    id: string,
+    profiles?: Profile[]
+    browser?: boolean,
+    addPackToProfile?: (p: string) => void
+}
+function Packs(props: PacksProps) {
     const { owner, id } = props
     const history = useHistory();
     const [packData, setPackData] = useState<PackData>({ name: '', icon: '', webPage: '', description: '', versions: [], downloads: 0, added: 0, updated: 0 });
     const [ownerInfo, setOwnerInfo] = useState<{ displayName: string, donation?: { kofi: string, patreon: string, other: string } }>({ displayName: '', donation: { kofi: '', patreon: '', other: '' } })
     const [maxVersions, setMaxVersions] = useState(5)
-
+    const profileDropdown = useRef<HTMLSelectElement>(null)
+    const addButton = useRef<HTMLButtonElement>(null)
     // const protocol = () => {
     //     customProtocolCheck(
     //         `smithed://packs/${owner}/${id}`,
@@ -160,6 +169,51 @@ function Packs(props: any) {
         </div>)
     }
 
+    const renderAppRightPanel = () => {
+        const isValid = () => {
+            if (profileDropdown.current?.value !== undefined && props.profiles) {
+                const profile = props.profiles.find(p => p.name === profileDropdown.current?.value)
+                if (!profile) return false
+
+                const v = packData.versions.find(v => {
+                    return v.supports.includes(profile?.version)
+                })
+                if(v === undefined) return false
+
+                if(profile.packs === undefined) return true
+                console.log(profile.packs.find(p => p.id === id))
+                return !profile.packs.find(p => p.id === id)
+            }
+            return false
+        }
+
+        return (<div className='flex flex-col'>
+            <h2 className='text-text'>Manage</h2>
+            <hr />
+            <div className='flex flex-col gap-2 pt-2'>
+                <div className='flex flex-row items-baseline gap-2'>
+                    <label>Profile: </label>
+                    <select placeholder='Select profile...' className='bg-lightBackground rounded-md p-2 w-full text-text placeholder:text-subText' ref={profileDropdown}>
+                        {(() => {
+                            if (props.profiles === undefined) return []
+                            let options: JSX.Element[] = []
+                            for (let p of props.profiles)
+                                options.push(<option>{p.name}</option>)
+                            return options
+                        })()}
+                    </select>
+                </div>
+                <button className='bg-lightAccent font-[Disket-Bold] p-2 font-lg rounded-md disabled:brightness-50 hover:brightness-75 active:brightness-[60%]' disabled={!isValid()} onClick={() => { 
+                    if(!props.addPackToProfile || !profileDropdown.current?.value) return
+                    props.addPackToProfile(profileDropdown.current?.value)
+
+                    if(!addButton.current) return
+                        addButton.current.disabled = true
+                }}>Add</button>
+            </div>
+        </div>)
+    }
+
     return (
         <div className='flex flex-col gap-4 font-[Inconsolata] text-text w-full'>
             <div className='flex flex-col p-2 xl:flex-row items-center xl:items-start xl:justify-center w-full'>
@@ -176,9 +230,9 @@ function Packs(props: any) {
                     </div>
                 </div>
                 <div className='flex w-full md:w-1/2 xl:w-1/4 justify-center px-4 gap-2 flex-col'>
-                    <div className='flex flex-col p-2 items-left' style={{ borderRadius: 8, border: `4px solid var(--lightAccent)`, backgroundColor: 'var(--darkBackground)' }}>
-                        {ownerInfo.donation !== undefined && renderLeftPanel()}
-                    </div>
+                    {ownerInfo.donation !== undefined && <div className='flex flex-col p-2 items-left' style={{ borderRadius: 8, border: `4px solid var(--lightAccent)`, backgroundColor: 'var(--darkBackground)' }}>
+                        {renderLeftPanel()}
+                    </div>}
                     <div className='flex flex-col p-2 items-left' style={{ borderRadius: 8, border: `4px solid var(--lightAccent)`, backgroundColor: 'var(--darkBackground)' }}>
                         <h2 style={{ color: 'var(--text)' }}>About</h2>
                         <hr className='w-full h-2' />
@@ -204,6 +258,7 @@ function Packs(props: any) {
                         </div>
                         <br />
                         {props.browser && renderBrowserRightPanel()}
+                        {!props.browser && renderAppRightPanel()}
                     </div>
                 </div>
             </div>
