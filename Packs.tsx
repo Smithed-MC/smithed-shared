@@ -120,11 +120,12 @@ function Packs(props: PacksProps) {
 
             versionElements.push(<div className='flex flex-col items-left w-full'>
                 <h3 style={{ color: 'var(--text)' }}>{v.name}</h3>
-                <div className='flex flex-row gap-4 w-full'>
-                    <label className='p-2 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{v.supports.join(', ')}</label>
+                <div className='flex flex-row gap-4 w-full items-baseline'>
                     <button className='p-2 rounded-md' onClick={() => {
-                        history.push(`/download?pack=${owner}:${id}@${v.name}`)
+                        window.open(`https://ovh.smithed.dev/api/download?pack=${owner}:${id}@${v.name}`)
                     }}>DOWNLOAD</button>
+                    for
+                    <label className='p-2 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{v.supports.join(', ')}</label>
                 </div>
             </div>)
 
@@ -162,9 +163,11 @@ function Packs(props: PacksProps) {
             {/* <button className='p-2 rounded-md w-full mb-2' onClick={() => protocol()}>VIEW IN SMITHED</button> */}
             <button className='p-2 rounded-md w-full mb-2' onClick={() => {
                 const supports = packData.versions[packData.versions.length - 1].supports
-                history.push(`/download?pack=${owner}:${id}&version=${supports[0]}`)
+                window.open(`https://ovh.smithed.dev/api/download?pack=${owner}:${id}&version=${supports[0]}`)
             }}>DOWNLOAD LATEST</button>
-            {generateDownloads()}
+            <div className='flex flex-col gap-4'>
+                {generateDownloads()}
+            </div>
             {packData.versions.length > maxVersions && <button className='p-2 w-1/2 mt-2' onClick={() => { setMaxVersions(maxVersions + 5) }}>SHOW MORE</button>}
         </div>)
     }
