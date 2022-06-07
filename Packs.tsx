@@ -122,7 +122,7 @@ function Packs(props: PacksProps) {
                 <h3 style={{ color: 'var(--text)' }}>{v.name}</h3>
                 <div className='flex flex-row gap-4 w-full items-baseline'>
                     <button className='p-2 rounded-md' onClick={() => {
-                        window.open(`https://ovh.smithed.dev/api/download?pack=${owner}:${id}@${v.name}`)
+                        window.open(`https://smithed.dev/api/download?pack=${owner}:${id}@${v.name}`)
                     }}>DOWNLOAD</button>
                     for
                     <label className='p-2 rounded-md' style={{ backgroundColor: 'var(--lightBackground)' }}>{v.supports.join(', ')}</label>
@@ -163,7 +163,7 @@ function Packs(props: PacksProps) {
             {/* <button className='p-2 rounded-md w-full mb-2' onClick={() => protocol()}>VIEW IN SMITHED</button> */}
             <button className='p-2 rounded-md w-full mb-2' onClick={() => {
                 const supports = packData.versions[packData.versions.length - 1].supports
-                window.open(`https://ovh.smithed.dev/api/download?pack=${owner}:${id}&version=${supports[0]}`)
+                window.open(`https://smithed.dev/api/download?pack=${owner}:${id}&version=${supports[0]}`)
             }}>DOWNLOAD LATEST</button>
             <div className='flex flex-col gap-4'>
                 {generateDownloads()}
