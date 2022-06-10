@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import { database } from './ConfigureFirebase'
 import Markdown from 'markdown-to-jsx';
-import { MarkdownOptions } from './Markdown';
+import { hideViaComments, MarkdownOptions } from './Markdown';
 import Profile from './Profile';
 
 interface VersionData {
@@ -227,7 +227,7 @@ function Packs(props: PacksProps) {
                     <div className='w-full h-1' style={{ backgroundColor: 'var(--lightAccent)', borderRadius: 8 }}></div>
                     <div className='flex xl:mx-16'>
                         <Markdown style={{ width: '100%', marginBottom: 8, fontFamily: 'Inconsolata', padding: 8, borderRadius: 4, backgroundColor: 'var(--darkBackground)' }} options={MarkdownOptions()}>
-                            {packData.webPage}
+                            {hideViaComments(packData.webPage)}
                         </Markdown>
                     </div>
                 </div>

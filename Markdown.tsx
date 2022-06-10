@@ -22,3 +22,14 @@ export const MarkdownOptions = (wrapper?: React.ElementType<any>): MarkdownToJSX
 		}
 	}
 }
+
+
+export function hideViaComments(content: string) {
+	while(content.includes('<!-- hide_on_smithed -->')) {
+		let start = content.indexOf('<!-- hide_on_smithed -->')
+		let end = content.indexOf('<!-- end_hide_on_smithed -->', start)
+		if(end === -1) break;
+		content = content.slice(0, start) + content.slice(end + '<!-- end_hide_on_smithed -->'.length)
+	}
+	return content
+}
