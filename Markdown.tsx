@@ -2,11 +2,12 @@ import { MarkdownToJSX } from "markdown-to-jsx"
 
 function ModifyiedA(props: any) {
 	return (
-		<a className="text-lightAccent" href={props.href} target="_blank" rel="noreferrer" title={props.title}>{props.children}</a>
+		<a {...props} className="text-lightAccent" href={props.href} target="_blank" rel="noreferrer" >{props.children}</a>
 	)
 }
 
 export const MarkdownOptions = (wrapper?: React.ElementType<any>): MarkdownToJSX.Options => {
+	
 	return {
 		wrapper: wrapper,
 		forceWrapper: wrapper != null ? true : false,

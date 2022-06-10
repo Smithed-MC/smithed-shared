@@ -32,7 +32,6 @@ interface PacksProps {
 }
 function Packs(props: PacksProps) {
     const { owner, id } = props
-    const history = useHistory();
     const [packData, setPackData] = useState<PackData>({ name: '', icon: '', webPage: '', description: '', versions: [], downloads: 0, added: 0, updated: 0 });
     const [ownerInfo, setOwnerInfo] = useState<{ displayName: string, donation?: { kofi: string, patreon: string, other: string } }>({ displayName: '', donation: { kofi: '', patreon: '', other: '' } })
     const [maxVersions, setMaxVersions] = useState(5)
