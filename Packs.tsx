@@ -217,7 +217,7 @@ function Packs(props: PacksProps) {
     }
 
     return (
-        <div className='flex flex-col gap-4 font-[Inconsolata] text-text w-full'>
+        <div className='flex flex-col gap-4 font-[Inconsolata] text-text w-full h-full overflow-y-scroll'>
             <div className='flex flex-col p-2 xl:flex-row items-center xl:items-start xl:justify-center w-full'>
                 <div className='flex flex-col gap-2 w-full xl:w-3/4 h-full'>
                     <div className='flex w-full gap-2 justify-left'>
